@@ -3,6 +3,7 @@
 
 latex
 html
+*.exe
 
 # User-specific files
 *.suo
