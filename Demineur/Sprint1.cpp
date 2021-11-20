@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cassert>
+#include <time.h>
+#include <stdlib.h>
 
 /**
  * @file Sprint1.c
@@ -7,8 +9,8 @@
  * @author Cyprien Méjat 
  * @version 1 20/11/2021
  * @date date description
- * @brief Fonctions de tri par ordre croissant de tableaux d'entiers  
- * Structures de donn�es et algorithmes - DUT1 Paris 5
+ * @brief Deuxième partie de la résolution du problème de la SAE 1.02 (Démineur)
+ * Produire une grille à partir d'un problème et d'un historique
  */
 
 #define NB_LIGNES_MAX 16
@@ -21,11 +23,15 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-int srand(time(NULL));
+
+struct Liste {
+	unsigned int tab[NB_CASES_MAX];	// Conteneur primaire (tableau statique)
+	unsigned int nbItems = 0; 	    // Nombre d'items stockés
+};
 
 
 unsigned int initialisationMines(unsigned int nbLignes, unsigned int nbColonnes,
-                                 unsigned int nbMines, unsigned int &dataMines);
+                                 unsigned int nbMines, Liste &dataMines);
 
 void creationProbleme();
 
@@ -38,17 +44,20 @@ void creationProbleme();
  * @param[inout] dataMines Liste de toutes les positions des mines
  */
 unsigned int initialisationMines(unsigned int nbLignes, unsigned int nbColonnes,
-                                 unsigned int nbMines, unsigned int &dataMines){
+                                 unsigned int nbMines, Liste &dataMines){
     bool positionNonUtilise = 1;
+    unsigned int position;
     for (unsigned int i=0; i<nbMines; i++){
-        bool positionNonUtilise = true;
         do{
-            unsigned int position = rand()%(nbLignes*nbColonnes);
+            bool positionNonUtilise = true;
+            position = rand()%(nbLignes*nbColonnes);
             for (unsigned int j=0; j<i; j++){
-                positionNonUtilise *= position != dataMines[j];
+                positionNonUtilise *= position != dataMines.tab[j];
             }
         }
         while(positionNonUtilise == false);
+        dataMines.tab[i] = position;
+        dataMines.nbItems++;
     }
 }
 
@@ -57,7 +66,8 @@ unsigned int initialisationMines(unsigned int nbLignes, unsigned int nbColonnes,
  * @brief Produit et affiche un problème
  */
 void creationProbleme(){
-    unsigned int nbLignes, nbColonnes, nbMines, dataMines[NB_CASES_MAX];
+    unsigned int nbLignes, nbColonnes, nbMines;
+    Liste dataMines;
 
     cin >> nbLignes >> nbColonnes >> nbMines;
 
@@ -69,13 +79,14 @@ void creationProbleme(){
     cout << nbLignes << " " << nbColonnes << " " << nbMines;
 
     for (unsigned int i=0; i<nbMines; i++){
-        cout << " " << dataMines[i];
+        cout << " " << dataMines.tab[i];
     }
 
     cout << endl;
 }
 
 int main(){
+    srand(time(NULL));
 
     unsigned int operation;
 
