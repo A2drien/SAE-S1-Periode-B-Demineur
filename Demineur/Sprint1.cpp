@@ -9,8 +9,8 @@
  * @author Cyprien Méjat 
  * @version 1 20/11/2021
  * @date date description
- * @brief Deuxième partie de la résolution du problème de la SAE 1.02 (Démineur)
- * Produire une grille à partir d'un problème et d'un historique
+ * @brief Première partie de la résolution du problème de la SAE 1.02 (Démineur)
+ * Produire un problème à partir d'une commande
  */
 
 #define NB_LIGNES_MAX 16
