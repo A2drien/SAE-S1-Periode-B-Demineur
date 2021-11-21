@@ -24,78 +24,78 @@ using std::cin;
 using std::endl;
 
 
-struct Liste {
-	unsigned int tab[NB_CASES_MAX];	// Conteneur primaire (tableau statique)
-	unsigned int nbItems = 0; 	    // Nombre d'items stockés
+// Structure contenant les données du problème fourni
+struct Probleme {
+    unsigned int nbLignes = 0;              // Nombre de lignes dans la grille
+    unsigned int nbColonnes = 0;            // Nombre de colonnes dans la grille
+    unsigned int nbMines = 0;               // Nombre de mines
+    unsigned int dataMines[NB_CASES_MAX];   // Liste de la position des mines
 };
 
 
-unsigned int initialisationMines(unsigned int nbLignes, unsigned int nbColonnes,
-                                 unsigned int nbMines, Liste &dataMines);
+void creationProbleme(Probleme &p);
 
-void creationProbleme();
+void affichageProbleme(const Probleme &p);
 
 
 /**
- * @brief Définie la position des mines sur la grille
- * @param[in] nbLignes Nombre de lignes de la grille
- * @param[in] nbColonnes Nombre de colonnes de la grille
- * @param[in] nbMines Nombre de mines dans la grille
- * @param[inout] dataMines Liste de toutes les positions des mines
+ * @brief Produit un problème
+ * @param[inout] p Problème à produire
  */
-unsigned int initialisationMines(unsigned int nbLignes, unsigned int nbColonnes,
-                                 unsigned int nbMines, Liste &dataMines){
-    bool positionNonUtilise = 1;
-    unsigned int position;
-    for (unsigned int i=0; i<nbMines; i++){
+void creationProbleme(Probleme &p){
+    cin >> p.nbLignes >> p.nbColonnes >> p.nbMines;
+
+    assert(p.nbLignes <= NB_LIGNES_MAX && p.nbColonnes <= NB_COLONNES_MAX);
+
+    bool positionUtilise;                   // Indique si la case est déjà minée
+    unsigned int nCase;                     // Numéro de la case minée
+
+    for (unsigned int i=0; i<p.nbMines; i++){
         do{
-            bool positionNonUtilise = true;
-            position = rand()%(nbLignes*nbColonnes);
+            positionUtilise = false;
+            nCase = rand()%(p.nbLignes*p.nbColonnes);
+
             for (unsigned int j=0; j<i; j++){
-                positionNonUtilise *= position != dataMines.tab[j];
+                if (nCase == p.dataMines[j])
+                    positionUtilise = true;
             }
         }
-        while(positionNonUtilise == false);
-        dataMines.tab[i] = position;
-        dataMines.nbItems++;
+        while (positionUtilise);
+
+        p.dataMines[i] = nCase;
     }
 }
 
 
 /**
- * @brief Produit et affiche un problème
+ * @brief Affiche un problème
+ * @param[in] p Problème à afficher
  */
-void creationProbleme(){
-    unsigned int nbLignes, nbColonnes, nbMines;
-    Liste dataMines;
+void affichageProbleme(const Probleme &p){
+    cout << p.nbLignes << " " << p.nbColonnes << " " << p.nbMines;
 
-    cin >> nbLignes >> nbColonnes >> nbMines;
-
-    assert(nbLignes <= NB_LIGNES_MAX && nbColonnes <= NB_COLONNES_MAX);
-    assert(nbMines <= nbLignes*nbColonnes);
-
-    initialisationMines(nbLignes, nbColonnes, nbMines, dataMines);
-
-    cout << nbLignes << " " << nbColonnes << " " << nbMines;
-
-    for (unsigned int i=0; i<nbMines; i++){
-        cout << " " << dataMines.tab[i];
+    for (unsigned int i=0; i<p.nbMines; i++){
+        cout << " " << p.dataMines[i];
     }
 
     cout << endl;
 }
+
 
 int main(){
     srand(time(NULL));
 
     unsigned int operation;
 
+    Probleme p;
+
     while (1){
         cin >> operation;
 
         switch (operation){
             case 1:
-                creationProbleme();
+                creationProbleme(p);
+                affichageProbleme(p);
                 break;
         }
     }
