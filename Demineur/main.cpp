@@ -1,8 +1,5 @@
-#include <iostream>
-#include <cassert>
-
 /**
- * @file Sprint2.c
+ * @file main.c
  * Projet Demineur
  * @author Cyprien Méjat 
  * @version 1 20/11/2021
@@ -11,39 +8,21 @@
  * Produire une grille à partir d'un problème et d'un historique
  */
 
-#define NB_LIGNES_MAX 16                // Nombre maximum de lignes acceptés
-#define NB_COLONNES_MAX 16              // Nombre maximum de colonnes acceptés
-#define NB_CASES_MAX NB_LIGNES_MAX*NB_COLONNES_MAX // Nombre maximum de cases
-#define LG_MOT_MAX 5                    // Longueur maximale d'un "mot"
-#define CONVERSION_CODE_ASCII 48        // Convertit un chiffre en ASCII
 
-#pragma warning (disable:4996)
+#include "structures/grille.h"
+#include "define.h"
+
+#include <iostream>
+#include <cassert>
 
 using std::cout;
 using std::cin;
 using std::endl;
 
 
-// Structure contenant l'historique des coups joués
-struct Historique {
-    unsigned int nbCoupsJoues = 0;      // Nombre de coups joués
-    char typeCoup[NB_CASES_MAX];        // Type du coup (marquer/démasquer)
-};
+void creationProbleme(Probleme &p);
 
-// Structure contenant les données du problème fourni
-struct Probleme {
-    unsigned int nbLignes = 0;          // Nombre de lignes dans la grille
-    unsigned int nbColonnes = 0;        // Nombre de colonnes dans la grille
-    unsigned int nbMines = 0;           // Nombre de mines
-    bool dataMines[NB_CASES_MAX];       // Indique si la case possède une mine
-};
-
-// Structure contenant la grille
-struct Grille {
-    Historique hist;                    // Historique des coups de la grille
-    Probleme probl;                     // Lignes, colonnes, mines de la grille
-	char affCases[NB_CASES_MAX];        // Ce qu'affiche chaque case
-};
+void affichageProbleme(const Probleme &p);
 
 void enregistrementProbleme(Probleme &p);
 
@@ -57,10 +36,66 @@ void initialisationGrille(Grille &g);
 
 void afficherGrille(const Grille &g);
 
+void creationGrille(Grille &g){};
+
+void testPartieGagne(const Grille &g){}
+
+void testPartiePerdue(const Grille &g){}
+
+void etatPartie();
+
+void nouveauCoup(Grille &g){}
+
+
+/**
+ * @brief Produit un problème
+ * @param[in] p Problème à produire
+ */
+void creationProbleme(Probleme &p){
+    cin >> p.nbLignes >> p.nbColonnes >> p.nbMines;
+    assert(p.nbMines <= p.nbCases);
+
+    p.nbCases = p.nbLignes * p.nbColonnes;
+    p.dataMines = new unsigned int[p.nbMines];
+
+    bool positionUtilise;               // Indique si la case est déjà minée
+    unsigned int nCase;                 // Numéro de la case minée
+
+    for (unsigned int i=0; i<p.nbMines; i++){
+        do{
+            positionUtilise = false;
+            nCase = rand()%(p.nbLignes*p.nbColonnes);
+
+            for (unsigned int j=0; j<i; j++){
+                if (nCase == p.dataMines[j])
+                    positionUtilise = true;
+            }
+        }
+        while (positionUtilise);
+
+        p.dataMines[i] = nCase;
+    }
+}
+
+
+/**
+ * @brief Affiche un problème
+ * @param[in] p Problème à afficher
+ */
+void affichageProbleme(const Probleme &p){
+    cout << p.nbLignes << " " << p.nbColonnes << " " << p.nbMines;
+
+    for (unsigned int i=0; i<p.nbMines; i++){
+        cout << " " << p.dataMines[i];
+    }
+
+    cout << endl;
+}
+
 
 /**
  * @brief Enregistre les données du problème
- * @param[inout] p Problème à enregistrer
+ * @param[in] p Problème à enregistrer
  */
 void enregistrementProbleme(Probleme &p){
     cin >> p.nbLignes >> p.nbColonnes >> p.nbMines;
