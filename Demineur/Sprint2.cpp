@@ -26,11 +26,10 @@ void initialisationGrille(Grille &g){
     initialisationProbleme(g.probl);
 
     g.affCases = new char[g.probl.nbCases];
-
-    enregistrementHistorique(g.hist);
     
+    // L'intégralité des cases sont de base masquées
     for (unsigned int i=0; i<g.probl.nbColonnes*g.probl.nbLignes; ++i){
-        g.affCases[i] = '.';   // Les cases sont de base masquées
+        g.affCases[i] = '.';
     }
 }
 
@@ -40,12 +39,15 @@ void initialisationGrille(Grille &g){
   * @param[in,out] p Problème de la grille
   */
 void enregistrementMinesProblemeGrille(Probleme &p){
+
+    // Aucune case n'est de base minée
     for (unsigned int i=0; i<p.nbCases; ++i){
         p.dataMines[i] = 0;
     }
     
     unsigned int positionMine; // Position de la mine
     
+    // Les cases minées consernées sont changées une à une
     for (unsigned int i=0; i<p.nbMines; ++i){
         cin >> positionMine;
         p.dataMines[positionMine] = 1;
@@ -74,10 +76,10 @@ void initialisationHistorique(Grille &g){
   */
 void devoilerCasesVidesAlentours(Grille &g, unsigned int nCase){
     // Abscisse et ordonnée de la case donné en paramètre
-    unsigned int x = nCase%g.probl.nbColonnes, y = nCase/g.probl.nbColonnes;
+    int x = nCase%g.probl.nbColonnes, y = nCase/g.probl.nbColonnes;
     
     // Abscisse et ordonnée maximales de la grille
-    unsigned int xMax = g.probl.nbColonnes-1, yMax = g.probl.nbLignes-1;
+    int xMax = g.probl.nbColonnes-1, yMax = g.probl.nbLignes-1;
     
     for (int i=-1; i<=1; ++i){
         for (int j=-1; j<=-1; ++j){
@@ -133,21 +135,6 @@ void demasquerCase(Grille &g, unsigned int nCase){
     
     else{
         g.affCases[nCase] = nbMinesAutours + CONVERSION_CODE_ASCII;
-    }
-}
-
-
-/**
-  * @brief Enregistre les données de l'historique
-  * @param[in,out] h Historique des coups
-  */
-void enregistrementHistorique(Historique &h){
-    cin >> h.nbCoupsJoues;
-    unsigned int position;
-    char typeAction;
-    for (unsigned int i=0; i<h.nbCoupsJoues; ++i){
-        cin >> typeAction >> position;
-        h.histCoups[position].typeCoup = typeAction;
     }
 }
 
@@ -218,7 +205,14 @@ void afficherGrille(const Grille &g){
   * @param[out] h Historique à détuire
   */
 void destuctionHistorique(Historique &h){
+    for (unsigned int i=0; i<h.nbCoupsJoues; ++i){
+        h.histCoups->typeCoup = NULL;
+        h.histCoups->nCase = NULL;
+    }
+
+    h.nbCoupsJoues = NULL;
     delete[] h.histCoups;
+    delete &h; //!!! A vérifier si cela fonctionne
 }
 
 
@@ -230,4 +224,5 @@ void destructionGrille(Grille &g){
     destructionProbleme(g.probl);
     destuctionHistorique(g.hist);
     delete[] g.affCases;
+    delete &g; //!!! A vérifier si cela fonctionne
 }

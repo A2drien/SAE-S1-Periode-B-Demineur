@@ -10,8 +10,6 @@ void enregistrementCoup(Grille &g){
 
     char caractereGrille;
 
-    
-
     for (unsigned int x=0; x<g.probl.nbLignes; ++x){
         // Efface la grille du côté haut
         for (unsigned int i=0; i<g.probl.nbLignes*4; ++i){

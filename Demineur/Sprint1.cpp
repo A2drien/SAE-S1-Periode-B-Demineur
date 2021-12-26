@@ -52,7 +52,7 @@ void placementMines(Probleme &p){
     // Place les mines demandées au début du tableau
     for (unsigned int i=0; i<p.nbMines; ++i){p.dataMines[i] = 1;}
 
-    // Rempli le reste du tableau de cases non minées
+    // Remplit le reste du tableau de cases non minées
     for (unsigned int i=p.nbMines; i<p.nbCases; ++i){p.dataMines[i] = 0;}
 
     // Mélange de Knuth, disperse aléatoirement les mines
@@ -80,7 +80,17 @@ void affichageProbleme(const Probleme &p){
     cout << endl;
 }
 
-
+/**
+  * @brief Affiche les données d'un problème
+  * @param[in] p Problème à afficher
+  */
 void destructionProbleme(Probleme &p){
+    p.nbLignes = NULL;
+    p.nbColonnes = NULL;
+    p.nbCases = NULL;
+    p.nbMines = NULL;
+    
     delete[] p.dataMines;
+    
+    delete &p; //!!! A vérifier si cela fonctionne
 }

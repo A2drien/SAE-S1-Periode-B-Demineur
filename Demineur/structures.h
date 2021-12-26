@@ -1,6 +1,7 @@
 #ifndef _STRUCTURES_
 #define _STRUCTURES_
 
+// Structure contenant le type de coup et la case consernée
 struct Coup {
     char typeCoup;                     // Type du coup (marquer/démasquer)
     unsigned int nCase;                // Numéro de la case du coup

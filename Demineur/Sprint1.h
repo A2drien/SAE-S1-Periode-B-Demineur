@@ -1,5 +1,5 @@
-#include "Structures.h"
-#include "Define.h"
+#include "structures.h"
+#include "define.h"
 
 #include <iostream>
 #include <cassert>
