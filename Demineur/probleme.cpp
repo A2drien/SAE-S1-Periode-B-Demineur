@@ -6,23 +6,7 @@
   * @brief Qqch
   */
 
-#include "Sprint1.h"
-#include <iostream>
-#include <cassert>
-
-/**
-  * @brief Produit et affiche un problème
-  */
-void creationProbleme(){
-    Probleme *p;
-
-    p = new Probleme;
-    
-    initialisationProbleme(*p);
-    placementMines(*p);
-    affichageProbleme(*p);
-    destructionProbleme(*p);
-}
+#include "probleme.h"
 
 
 /**
@@ -34,10 +18,10 @@ void creationProbleme(){
   */
 void initialisationProbleme(Probleme &p){
     cin >> p.nbLignes >> p.nbColonnes >> p.nbMines;
+    p.nbCases = p.nbLignes * p.nbColonnes;
     assert(p.nbMines <= p.nbCases);
 
-    p.nbCases = p.nbLignes * p.nbColonnes;
-    p.dataMines = new bool[p.nbMines];
+    p.dataMines = new bool[p.nbCases];
 }
 
 /**
@@ -46,7 +30,7 @@ void initialisationProbleme(Probleme &p){
   * @pre Le nombre de mines demandé est inférieur ou égal au nombre de cases
   * total
   */
-void placementMines(Probleme &p){
+void placementMinesAleatoire(Probleme &p){
     assert(p.nbMines <= p.nbCases);
 
     // Place les mines demandées au début du tableau
@@ -91,6 +75,4 @@ void destructionProbleme(Probleme &p){
     p.nbMines = NULL;
     
     delete[] p.dataMines;
-    
-    delete &p; //!!! A vérifier si cela fonctionne
 }

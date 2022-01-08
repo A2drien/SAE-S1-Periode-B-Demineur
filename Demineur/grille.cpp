@@ -8,29 +8,24 @@
   * Produire une grille à partir d'un problème et d'un historique
   */
 
-#include <iostream>
-#include <cassert>
+#include "grille.h"
 
-#include "Sprint1.cpp"
-#include "Sprint2.h"
-
-using namespace std;
-
-
-/**
+  /**
   * @brief Initialise une grille
   * @param[in] g Grille
   */
 void initialisationGrille(Grille &g){
-    initialisationHistorique(g);
     initialisationProbleme(g.probl);
+    enregistrementMinesProblemeGrille(g.probl);
 
     g.affCases = new char[g.probl.nbCases];
     
     // L'intégralité des cases sont de base masquées
-    for (unsigned int i=0; i<g.probl.nbColonnes*g.probl.nbLignes; ++i){
+    for (unsigned int i=0; i<g.probl.nbCases; ++i){
         g.affCases[i] = '.';
     }
+
+    initialisationHistorique(g);
 }
 
 
@@ -61,6 +56,7 @@ void enregistrementMinesProblemeGrille(Probleme &p){
   */
 void initialisationHistorique(Grille &g){
     cin >> g.hist.nbCoupsJoues;
+
     g.hist.histCoups = new Coup[g.hist.nbCoupsJoues];
     
     for (unsigned int i=0; i<g.hist.nbCoupsJoues; ++i){
@@ -147,10 +143,10 @@ void demasquerCase(Grille &g, unsigned int nCase){
   */
 unsigned int nbMinesAlentours(const Probleme &p, unsigned int nCase){
     // Abscisse et ordonnée de la case donnée en paramètre
-    unsigned int x = nCase%p.nbColonnes, y = nCase/p.nbColonnes;
+    int x = nCase%p.nbColonnes, y = nCase/p.nbColonnes;
     
     // Abscisse et ordonnée maximales de la grille
-    unsigned int xMax = p.nbColonnes-1, yMax = p.nbLignes-1;
+    int xMax = p.nbColonnes-1, yMax = p.nbLignes-1;
     
     unsigned int nbMines = 0; // Nombre de mines autour de la case donnée
 
@@ -179,6 +175,7 @@ void afficherGrille(const Grille &g){
     unsigned int nbLignes = g.probl.nbLignes;
     unsigned int nbColonnes = g.probl.nbColonnes;
 
+    //!!!
     cout << nbLignes << " " << nbColonnes << endl;
 
     for (unsigned int i=0; i<nbLignes; ++i){
@@ -212,7 +209,6 @@ void destuctionHistorique(Historique &h){
 
     h.nbCoupsJoues = NULL;
     delete[] h.histCoups;
-    delete &h; //!!! A vérifier si cela fonctionne
 }
 
 
@@ -221,8 +217,36 @@ void destuctionHistorique(Historique &h){
  * @param g Grille à détruire
  */
 void destructionGrille(Grille &g){
+
     destructionProbleme(g.probl);
     destuctionHistorique(g.hist);
-    delete[] g.affCases;
-    delete &g; //!!! A vérifier si cela fonctionne
+    delete& g.hist;
+    //delete[] g.affCases;
+}
+
+
+/**
+  * @brief Enregistre la grille fournie au clavier
+  * @param[out] g Grille
+  */
+void enregistrementGrilleClavier(Grille& g) {
+    cin >> g.probl.nbLignes >> g.probl.nbColonnes;
+
+    char caractereGrille;
+
+    for (unsigned int x = 0; x < g.probl.nbLignes; ++x) {
+        // Efface la grille du côté haut
+        for (unsigned int i = 0; i < g.probl.nbLignes * 4; ++i) {
+            cin >> caractereGrille;
+        }
+
+        for (unsigned int y = 0; y < g.probl.nbColonnes; ++y) {
+            cin >> g.affCases[x * g.probl.nbLignes + y];
+        }
+    }
+}
+
+
+void coupAleatoire(Grille& g, Coup& c) {
+
 }

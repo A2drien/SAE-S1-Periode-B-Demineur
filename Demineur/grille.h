@@ -1,6 +1,31 @@
-#include "structures.h"
-#include "define.h"
+#ifndef _GRILLE_
 
+#define _GRILLE_
+
+#include "probleme.h"
+#define CONVERSION_CODE_ASCII 48;      // Convertit un chiffre en ASCII; 
+
+
+// Structure contenant le type de coup et la case consernée
+struct Coup {
+    char typeCoup;                     // Type du coup (marquer/démasquer)
+    unsigned int nCase;                // Numéro de la case du coup
+};
+
+
+// Structure contenant l'historique des coups joués
+struct Historique {
+    unsigned int nbCoupsJoues;          // Nombre de coups joués
+    Coup* histCoups;                    // Historique des coups joués
+};
+
+
+// Structure contenant la grille
+struct Grille {
+    Historique hist;                    // Historique des coups de la grille
+    Probleme probl;                     // Lignes, colonnes, mines de la grille
+    char* affCases;                     // Ce qu'affiche chaque case
+};
 
 
 /**
@@ -77,18 +102,13 @@ void destuctionHistorique(Historique &h);
 void destructionGrille(Grille &g);
 
 
+/**
+  * @brief Enregistre la grille fournie au clavier
+  * @param[out] g Grille
+  */
+void enregistrementGrilleClavier(Grille& g);
 
 
 
-
-
-
-
-// Serviront pour d'autres Sprints
-void testPartieGagne(const Grille &g);
-
-void testPartiePerdue(const Grille &g);
-
-void etatPartie();
-
-void nouveauCoup(Grille &g);
+void coupAleatoire(Grille &g, Coup &c);
+#endif

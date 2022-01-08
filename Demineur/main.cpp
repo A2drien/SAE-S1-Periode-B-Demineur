@@ -1,20 +1,20 @@
-#include "Sprint1.cpp"
-#include "Sprint2.cpp"
+#include "liste_commandes.h"
 
-#include <iostream>
-
-using namespace std;
 
 int main(){
+
     unsigned int typeCommande;
+    
     while (1){
-        std::cin >> typeCommande;
+        
+        cin >> typeCommande;
+        
         switch(typeCommande){
-            case 1: creationProbleme(); break;
-            case 2: break;
-            case 3: break;
-            case 4: break;
-            case 5: break;
+            case 1: creationProbleme();         break;
+            case 2: ordreAfficherGrille();      break;
+            case 3: verificationPartieGagnee(); break;
+            case 4: verificationPartiePerdue(); break;
+            case 5: coupOrdinateur();           break;
         }
     }
 }

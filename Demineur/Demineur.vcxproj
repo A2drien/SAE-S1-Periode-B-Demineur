@@ -19,7 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sprint2.cpp" />
+    <ClCompile Include="etat_partie.cpp" />
+    <ClCompile Include="grille.cpp" />
+    <ClCompile Include="historique.cpp" />
+    <ClCompile Include="liste_commandes.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="probleme.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="etat_partie.h" />
+    <ClInclude Include="grille.h" />
+    <ClInclude Include="historique.h" />
+    <ClInclude Include="liste_commandes.h" />
+    <ClInclude Include="probleme.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
