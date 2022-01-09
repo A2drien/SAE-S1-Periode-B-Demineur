@@ -1,4 +1,12 @@
+/**
+  * @file liste_commandes.cpp
+  * @author Cyprien Méjat
+  * @brief Contient le code des 5 commandes principales
+  */
+
+
 #include "liste_commandes.h"
+
 
 /**
   * @brief Code commende 1 : Produit et affiche un problème
@@ -27,11 +35,15 @@ void ordreAfficherGrille(){
     g = new Grille;
 
     initialisationGrille(*g);
-    enregistrementMinesProblemeGrille(g->probl);
+
+    if (partieFinie(*g) == 1) {
+        devoilerMines(*g);
+    }
+
     afficherGrille(*g);
     destructionGrille(*g);
 
-    delete& g;
+    //delete& g;
 }
 
 

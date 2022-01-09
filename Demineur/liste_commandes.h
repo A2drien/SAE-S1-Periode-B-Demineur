@@ -1,7 +1,16 @@
+/**
+  * @file liste_commandes.h
+  * @author Cyprien Méjat
+  * @brief Contient les déclarations des 5 commandes principales
+  */
+
+
 #ifndef _LISTE_COMMANDES_
 #define _LISTE_COMMANDES_
 
-#include "etat_partie.h"
+
+#include "grille.h"
+
 
 /**
   * @brief Code commende 1 : Produit et affiche un problème

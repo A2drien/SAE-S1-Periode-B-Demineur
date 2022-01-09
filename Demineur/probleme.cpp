@@ -1,10 +1,10 @@
 /**
-  * @file Sprint1.c
-  * Projet Demineur
+  * @file probleme.cpp
   * @author Cyprien Méjat
-  * @date 20/11/2021
-  * @brief Qqch
+  * @brief Contient le code concernant la structure probleme, tels
+  * que l'initialisation, l'affichage, la destruction...
   */
+
 
 #include "probleme.h"
 
@@ -23,31 +23,6 @@ void initialisationProbleme(Probleme &p){
 
     p.dataMines = new bool[p.nbCases];
 }
-
-/**
-  * @brief Place les mines du problème avec l'algorithme de 
-  * @param[in,out] p Le problème dont il faut placer les mines
-  * @pre Le nombre de mines demandé est inférieur ou égal au nombre de cases
-  * total
-  */
-void placementMinesAleatoire(Probleme &p){
-    assert(p.nbMines <= p.nbCases);
-
-    // Place les mines demandées au début du tableau
-    for (unsigned int i=0; i<p.nbMines; ++i){p.dataMines[i] = 1;}
-
-    // Remplit le reste du tableau de cases non minées
-    for (unsigned int i=p.nbMines; i<p.nbCases; ++i){p.dataMines[i] = 0;}
-
-    // Mélange de Knuth, disperse aléatoirement les mines
-    for (unsigned int i=p.nbCases-1; i>0; --i){
-        unsigned int j = rand()%(i+1);
-        bool tmp = p.dataMines[j];
-        p.dataMines[j] = p.dataMines[i];
-        p.dataMines[i] = tmp;
-    }
-}
-
 
 /**
   * @brief Affiche les données d'un problème

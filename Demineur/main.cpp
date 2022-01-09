@@ -17,4 +17,5 @@ int main(){
             case 5: coupOrdinateur();           break;
         }
     }
+    return 0;
 }

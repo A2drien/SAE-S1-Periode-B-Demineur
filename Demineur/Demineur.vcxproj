@@ -19,19 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cases.cpp" />
     <ClCompile Include="etat_partie.cpp" />
     <ClCompile Include="grille.cpp" />
     <ClCompile Include="historique.cpp" />
     <ClCompile Include="liste_commandes.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="probleme.cpp" />
+    <ClCompile Include="mines.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cases.h" />
     <ClInclude Include="etat_partie.h" />
     <ClInclude Include="grille.h" />
+    <ClInclude Include="mines.h" />
     <ClInclude Include="historique.h" />
     <ClInclude Include="liste_commandes.h" />
     <ClInclude Include="probleme.h" />
+    <ClInclude Include="structures.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

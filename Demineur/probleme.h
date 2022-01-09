@@ -1,30 +1,39 @@
+/**
+  * @file grille.cpp
+  * @author Cyprien Méjat
+  * @brief Contient les déclarations concernant la structure probleme, tels
+  * que l'initialisation, l'affichage, la destruction...
+  */
+
+
 #ifndef _PROBLEME_
 #define _PROBLEME_
 
-#include <iostream>
-#include <cassert>
 
-using namespace std;
+#include "structures.h"
 
 
-// Structure contenant les données du problème fourni
-struct Probleme {
-    unsigned int nbLignes;              // Nombre de lignes dans la grille
-    unsigned int nbColonnes;            // Nombre de colonnes dans la grille
-    unsigned int nbCases;               // Nombre de cases dans la grille
-    unsigned int nbMines;               // Nombre de mines dans la grille
-    bool* dataMines;                    // Indique si la case n est minée
-};
-
-
-void creationProbleme();
-
+/**
+  * @brief Initialise un paramètre à partir des du nombre de ligne, de colonnes,
+  * et de mines
+  * @param[in] p Le problème à initialiser
+  * @pre Le nombre de mines demandé est inférieur ou égal au nombre de cases
+  * total
+  */
 void initialisationProbleme(Probleme &p);
 
-void placementMinesAleatoire(Probleme &p);
 
+/**
+  * @brief Affiche les données d'un problème
+  * @param[in] p Problème à afficher
+  */
 void affichageProbleme(const Probleme &p);
 
+
+/**
+  * @brief Affiche les données d'un problème
+  * @param[in] p Problème à afficher
+  */
 void destructionProbleme(Probleme &p);
 
 #endif
