@@ -39,9 +39,10 @@ void affichageProbleme(const Probleme &p){
     cout << endl;
 }
 
+
 /**
   * @brief Affiche les données d'un problème
-  * @param[in] p Problème à afficher
+  * @param[out] p Problème à afficher
   */
 void destructionProbleme(Probleme &p){
     p.nbLignes = NULL;

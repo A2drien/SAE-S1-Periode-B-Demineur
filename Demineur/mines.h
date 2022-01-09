@@ -1,7 +1,8 @@
 /**
   * @file mines.h
   * @author Cyprien Méjat
-  * @brief Contient les déclarations concernant le placement, le dévoilement, etc des mines.
+  * @brief Contient les déclarations concernant le placement, le dévoilement,
+  * etc des mines.
   */
 
 
@@ -42,7 +43,9 @@ unsigned int nbMinesAlentours(const Probleme& p, unsigned int nCase);
 
 /**
   * @brief Fait apparaître toutes les mines
-  * @param[in] g Grille
+  * @param[in,out] g Grille
   */
 void devoilerMines(Grille& g);
+
+
 #endif

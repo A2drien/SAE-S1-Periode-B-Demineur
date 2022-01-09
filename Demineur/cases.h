@@ -1,3 +1,10 @@
+/**
+  * @file cases.h
+  * @author Cyprien Méjat
+  * @brief Contient les déclarations qui dévoilent et démasquent les cases
+  */
+
+
 #ifndef _CASES_
 #define _CASES_
 

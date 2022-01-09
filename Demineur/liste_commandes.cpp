@@ -20,8 +20,6 @@ void creationProbleme(){
     placementMinesAleatoire(*p);
     affichageProbleme(*p);
     destructionProbleme(*p);
-    
-    delete& p;
 }
 
 
@@ -31,7 +29,6 @@ void creationProbleme(){
   */
 void ordreAfficherGrille(){
     Grille *g;
-
     g = new Grille;
 
     initialisationGrille(*g);
@@ -42,56 +39,46 @@ void ordreAfficherGrille(){
 
     afficherGrille(*g);
     destructionGrille(*g);
-
-    //delete& g;
 }
 
 
 /**
-  * @brief Code commande 3 : affiche "game win" si la partie est gagné,
-  * "game in progress" sinon.
+  * @brief Code commande 3 : affiche "game won" si la partie est gagné,
+  * "game not won" sinon.
   */
 void verificationPartieGagnee() {
     Grille* g;
-
     g = new Grille;
 
     initialisationGrille(*g);
-    enregistrementMinesProblemeGrille(g->probl);
 
     if (partieGagne(*g))
-        cout << "game win" << endl;
+        cout << "game won" << endl;
 
     else
-        cout << "game in progress" << endl;
+        cout << "game not won" << endl;
 
     destructionGrille(*g);
-
-    delete& g;
 }
 
 
 /**
   * @brief Code commande 4 : affiche "game lost" si la partie est perdue,
-  * "game in progress" sinon.
+  * "game not lost" sinon.
   */
 void verificationPartiePerdue() {
     Grille* g;
-
     g = new Grille;
 
     initialisationGrille(*g);
-    enregistrementMinesProblemeGrille(g->probl);
 
     if (partiePerdue(*g))
         cout << "game lost" << endl;
 
     else
-        cout << "game in progress" << endl;
+        cout << "game not lost" << endl;
 
     destructionGrille(*g);
-
-    delete& g;
 }
 
 
@@ -100,12 +87,12 @@ void verificationPartiePerdue() {
   */
 void coupOrdinateur() {
     Grille* g;
-
     g = new Grille;
 
-    enregistrementGrilleClavier(*g);
+    bool* listeCoupsPossibles;
+    listeCoupsPossibles = new bool;
 
-    Coup coup;
+    unsigned int nbCoupsPossibles = enregistrementGrilleClavier(*g);
 
-    coupAleatoire(*g, coup);
+    selectionnerCoupAleatoire(*g, nbCoupsPossibles);
 }

@@ -16,7 +16,7 @@
 using namespace std;
 
 
-// Structure contenant le type de coup et la case consernée
+// Structure contenant le type de coup et la case concernée
 struct Coup {
     char typeCoup;                     // Type du coup (marquer/démasquer)
     unsigned int nCase;                // Numéro de la case du coup
@@ -46,5 +46,6 @@ struct Grille {
     Probleme probl;                     // Lignes, colonnes, mines de la grille
     char* affCases;                     // Ce qu'affiche chaque case
 };
+
 
 #endif

@@ -1,3 +1,10 @@
+/**
+  * @file cases.h
+  * @author Cyprien Méjat
+  * @brief Contient le code qui dévoile et démasque les cases
+  */
+
+
 #include "cases.h"
 
 
@@ -23,8 +30,9 @@ void devoilerCasesVidesAlentours(Grille& g, unsigned int nCase) {
              * 4) La case à tester n'a pas encore été démasquée ou marquée
              * Alors, démasquer la case testée */
 
-            if ((i != 0 || j != 0) && (0 <= i + x && i + x <= xMax) && (0 <= j + y &&
-                j + y <= yMax) && g.affCases[(j + y) * g.probl.nbColonnes + (x + i)] == '.') {
+            if ((i != 0 || j != 0) && (0 <= i + x && i + x <= xMax) &&
+                (0 <= j + y && j + y <= yMax) &&
+                g.affCases[(j + y) * g.probl.nbColonnes + (x + i)] == '.') {
 
                 demasquerCase(g, (j + y) * g.probl.nbColonnes + (x + i));
             }

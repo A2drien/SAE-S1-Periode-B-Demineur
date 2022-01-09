@@ -1,7 +1,8 @@
 /**
   * @file mines.cpp
   * @author Cyprien Méjat
-  * @brief Contient le code concernant le placement, le dévoilement, etc des mines.
+  * @brief Contient le code concernant le placement, le dévoilement, etc des
+  * mines.
   */
 
 
@@ -77,12 +78,11 @@ unsigned int nbMinesAlentours(const Probleme& p, unsigned int nCase) {
              * 2) L'abscisse de la case à tester est cohérente (0 <= x <= xMax)
              * 3) L'ordonnée de la case à tester est cohérente (0 <= y <= yMax)
              * Alors, ajoute 1 si la case testée est minée */
-            if ((i != 0 || j != 0) && (0 <= i + x && i + x <= xMax) && (0 <= j + y &&
-                j + y <= yMax)) {
+            
+            if ((i != 0 || j != 0) && (0 <= i + x && i + x <= xMax) &&
+                (0 <= j + y && j + y <= yMax)) {
                 nbMines += p.dataMines[(j + y) * p.nbColonnes + (x + i)];
             }
-            //cout << "Case al : " << (j + y) * p.nbColonnes + (x + i) << endl;
-            //cout << "0 <= " << i + x << " <= " << xMax << " et 0 <= " << j + y << " <= " << yMax << " et mines = " << p.dataMines[nCase] << endl;
         }
     }
     return nbMines;
@@ -91,7 +91,7 @@ unsigned int nbMinesAlentours(const Probleme& p, unsigned int nCase) {
 
 /** 
   * @brief Fait apparaître toutes les mines
-  * @param[in] g Grille
+  * @param[in,out] g Grille
   */
 void devoilerMines(Grille& g) {
     for (unsigned int i = 0; i < g.probl.nbCases; ++i) {

@@ -15,6 +15,9 @@
 #include "etat_partie.h"
 
 
+#define NB_CARACTERE_CASE 3
+
+
 /**
   * @brief Initialise une grille
   * @param[in] g Grille
@@ -38,10 +41,18 @@ void destructionGrille(Grille &g);
 
 /**
   * @brief Enregistre la grille fournie au clavier
-  * @param[out] g Grille
+  * @param[in] g Grille
+  * @return nbCoupsPossibles nombres de coups possibles dans la liste
   */
-void enregistrementGrilleClavier(Grille& g);
+unsigned int enregistrementGrilleClavier(Grille& g);
 
 
-void coupAleatoire(Grille &g, Coup &c);
+/**
+ * @brief Sélectionne et affiche un coup aléatoire
+ * @param g Grille
+ * @param nbCoupsPossibles Nombre de cases libres 
+ */
+void selectionnerCoupAleatoire(const Grille& g, unsigned int nbCoupsPossibles);
+
+
 #endif

@@ -1,7 +1,8 @@
 /**
   * @file etat_partie.h
-  * @author Cyprien Méjat
-  * @brief Contient les déclarations concernant les états de la partie (gagnée, perdue, en cours)
+  * @author Cyprien Mï¿½jat
+  * @brief Contient les dï¿½clarations concernant les ï¿½tats de la partie
+  * (gagnï¿½e, perdue, en cours)
   */
 
 
@@ -13,7 +14,7 @@
 
 
 /**
-  * @brief Retourne 1 si la partie est gagnée, 0 sinon
+  * @brief Retourne 1 si la partie est gagnï¿½e, 0 sinon
   * @param[in] g Grille
   */
 bool partieGagne(const Grille& g);
@@ -27,9 +28,10 @@ bool partiePerdue(const Grille& g);
 
 
 /**
-  * @brief Retourne 1 si la partie est finie (gagnée ou perdue)
+  * @brief Retourne 1 si la partie est finie (gagnï¿½e ou perdue)
   * @param[in] g Grille
   */
 bool partieFinie(const Grille& g);
+
 
 #endif

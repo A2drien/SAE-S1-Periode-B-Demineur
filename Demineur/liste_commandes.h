@@ -26,15 +26,15 @@ void ordreAfficherGrille();
 
 
 /**
-  * @brief Code commande 3 : affiche "game lost" si la partie est perdue,
-  * "game in progress" sinon.
+  * @brief Code commande 3 : affiche "game won" si la partie est perdue,
+  * "game not won" sinon.
   */
 void verificationPartieGagnee();
 
 
 /**
   * @brief Code commande 4 : affiche "game lost" si la partie est perdue,
-  * "game in progress" sinon.
+  * "game not lost" sinon.
   */
 void verificationPartiePerdue();
 
@@ -43,4 +43,6 @@ void verificationPartiePerdue();
   * @brief Code commande 5 : Donne un coup que pourrait jouer l'ordinateur
   */
 void coupOrdinateur();
+
+
 #endif

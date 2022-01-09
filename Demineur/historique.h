@@ -16,7 +16,7 @@
 /**
   * @brief Enregistre un coup fourni dans l'historique
   * @param[in,out] g Grille
-  * @param[in] nCoup Numéro du coup dans l'historique
+  * @param[in] nCoup Index du coup dans l'historique
   */
 void enregistrementCoupHistorique(Grille& g, unsigned int nCoup);
 
@@ -33,5 +33,6 @@ void initialisationHistorique(Grille& g);
   * @param[out] h Historique à détuire
   */
 void destuctionHistorique(Historique &h);
+
 
 #endif

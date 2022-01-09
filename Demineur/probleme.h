@@ -32,8 +32,9 @@ void affichageProbleme(const Probleme &p);
 
 /**
   * @brief Affiche les données d'un problème
-  * @param[in] p Problème à afficher
+  * @param[out] p Problème à afficher
   */
 void destructionProbleme(Probleme &p);
+
 
 #endif

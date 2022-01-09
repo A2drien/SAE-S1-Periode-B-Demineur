@@ -75,26 +75,83 @@ void destructionGrille(Grille &g){
 
 /**
   * @brief Enregistre la grille fournie au clavier
-  * @param[out] g Grille
+  * @param[in] g Grille
+  * @return nbCoupsPossibles nombres de coups possibles dans la liste
   */
-void enregistrementGrilleClavier(Grille& g) {
+unsigned int enregistrementGrilleClavier(Grille& g) {
     cin >> g.probl.nbLignes >> g.probl.nbColonnes;
+    g.probl.nbCases = g.probl.nbColonnes * g.probl.nbLignes;
+
+    g.affCases = new char[g.probl.nbCases];
 
     char caractereGrille;
+    unsigned int nbCoupsPossibles = 0;
 
     for (unsigned int x = 0; x < g.probl.nbLignes; ++x) {
+
         // Efface la grille du côté haut
-        for (unsigned int i = 0; i < g.probl.nbLignes * 4; ++i) {
+        for (unsigned int i = 0; i < g.probl.nbColonnes * NB_CARACTERE_CASE; ++i) {
             cin >> caractereGrille;
         }
 
+        cin >> caractereGrille; // Enlève le | de gauche
+
+        // Enregistre le contenu des cases
         for (unsigned int y = 0; y < g.probl.nbColonnes; ++y) {
-            cin >> g.affCases[x * g.probl.nbLignes + y];
+            cin >> caractereGrille;
+
+            // S'il trouve le symbole '|', c'est qu'il devait prendre un espace
+            if (caractereGrille == '|') {
+                g.affCases[x * g.probl.nbColonnes + y] = ' ';
+            }
+
+            // Sinon, c'est le bon caractère
+            else {
+                g.affCases[x * g.probl.nbColonnes + y] = caractereGrille;
+                cin >> caractereGrille; // Enlève le | à droite
+
+                if (g.affCases[x * g.probl.nbColonnes + y] == '.') {
+                    nbCoupsPossibles++;
+                }
+            }
         }
     }
+
+    // Efface la grille du côté bas
+    for (unsigned int i = 0; i < g.probl.nbColonnes * NB_CARACTERE_CASE; ++i) {
+        cin >> caractereGrille;
+    }
+
+    return nbCoupsPossibles;
 }
 
 
-void coupAleatoire(Grille& g, Coup& c) {
+/**
+ * @brief Sélectionne et affiche un coup aléatoire
+ * @param g Grille
+ * @param nbCoupsPossibles Nombre de cases libres 
+ */
+void selectionnerCoupAleatoire(const Grille& g, unsigned int nbCoupsPossibles) {
+    // Afficher le type de coup (il y en a 2, donc une chance sur 2) :
+    if (rand() % 2 == 0)
+        cout << "D";
 
+    else
+        cout << "M";
+
+
+    // Afficher la case à marquer/démasquer : 
+    unsigned int nCase = rand() % nbCoupsPossibles;
+    unsigned int idxCase = 0;
+
+    for (unsigned int i = 0; i < g.probl.nbCases; ++i) {
+        if (g.affCases[i] == '.' && idxCase == nCase) {
+            cout << i;
+            break;
+        }
+
+        else if (g.affCases[i] == '.'){
+            idxCase++;
+        }
+    }
 }
